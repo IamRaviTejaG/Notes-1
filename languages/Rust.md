@@ -103,7 +103,7 @@ created with optimizations to make the rust code run faster.
   string. `::new` means `new` is a function associated with the type `String`
 - Example of using stdlib methods provided we have declared `io` in the scope of
   the program using `use std::io`:
-  ```
+  ```rust
   io::stdin().read_line(&mut v)
       .expect("Failed to read line");
   ```
@@ -119,7 +119,7 @@ created with optimizations to make the rust code run faster.
   `io::Result` has an `expect` method that displays the message provided if it
   has the variant `Err`.
 - *Placeholders:*
-  ```
+  ```rust
   let x = 5;
   let y = 10;
 
@@ -133,7 +133,7 @@ created with optimizations to make the rust code run faster.
   in the browser.
 
 ## Better Error Handling
-```
+```rust
 let guess: u32 = match guess.trim().parse() {
     Ok(num) => num,
     Err(_) => continue,
@@ -172,7 +172,7 @@ The underscore, `_`, is a catchall value; in this example, we’re saying we wan
 A new variable can be declared with the same name as that of a previous one. The
 new variable then shadows the previous one and the value displayed is that of
 most recent variable that shadowed its previous ones.
-```
+```rust
 fn main() {
     let x = 5;
 
@@ -191,13 +191,13 @@ The value of x is: 12
 By using let, we can perform a few transformations on a value but have the variable be immutable after those transformations have been completed.
 
 The other difference between mut and shadowing is that because we’re effectively creating a new variable when we use the let keyword again, we can change the type of the value but reuse the same name. For e.g:
-```
+```rust
 let spaces = "   ";
 let spaces = spaces.len();
 ```
 The second spaces is a new variable so can be assigned a different types
 but the same thing with `mut` raises errors
-```
+```rust
 let mut spaces = "   ";
 spaces = spaces.len();
 ```
@@ -218,7 +218,7 @@ the compiler might complain.
 ## Compounds
 
 1. Tuples (multiple types of elements):
-          ```
+          ```rust
           fn main() {
               // declares a tuple `tup`
               let tup: (i32, f64, u8) = (500, 6.4, 1);
@@ -234,7 +234,7 @@ the compiler might complain.
    This :point_up: can also be done without the type annotations
 
 2. Array (same types of element): The following gives an index out of bounds
-          ```
+          ```rust
           fn main() {
               let a = [1, 2, 3, 4, 5];
               let index = 10;
@@ -255,7 +255,7 @@ the compiler might complain.
   expression's value is implicitly returned as the return value for that
   function.
 
-  ```
+  ```rust
   fn main() {
       let x = plus_one(5);
 
@@ -272,7 +272,7 @@ something like `x = y = 5` wouldn't be possible in Rust since statements don't
 have return values.
 
 ## Expressions
-```
+```rust
 fn main() {
     let x = 5;
 
@@ -295,7 +295,7 @@ Anything that returns a value is without a `;`
 ## Control Flow
 
 - The condition in an if statement must result into a bool. This gives an error
-  ```
+  ```rust
   fn main() {
       let number = 3;
 
@@ -305,7 +305,7 @@ Anything that returns a value is without a `;`
   }
   ```
 - Since `if`s are expressions they can be used on the RHS of `let`s
-  ```
+  ```rust
   let number = if condition {
         5
   } else {
@@ -314,7 +314,7 @@ Anything that returns a value is without a `;`
   ```
   This on the other hand won't work. The type of number needs to be know at
   compile time.
-  ```
+  ```rust
   let number = if condition {
         5
   } else {
@@ -323,7 +323,7 @@ Anything that returns a value is without a `;`
   ```
 - There are 3 kinds of loops: `loop`, `while`, `for`. A `for` (more safe and
   concise than `while`s) loop looks like:
-  ```
+  ```rust
   fn main() {
       let a = [10, 20, 30, 40, 50];
 
@@ -352,7 +352,7 @@ addresses are all stored on the stack but the actual data values are stored on
 the heap.
 
 
-```
+```rust
 let ims = "immutable string stored on the stack"
 
 let mut s = String::from("hello");
@@ -364,7 +364,7 @@ As soon as the variable (owner of a data value) goes out of scope the memory
 allocated for that data is returned to the OS. At the `}` Rust calls a special
 funcions `drop` to do this.
 
-```
+```rust
 let x = 5; // bind the value 5 to x
 let y = x; // make a copy of the value in x and bind it to y
 
@@ -391,7 +391,7 @@ This way Rust automatically prevents making deep copies of your data which might
 give us a performance gain.
 
 **Making deliberate Deep Copy:**
-```
+```rust
 let s1 = String::from("hello");
 let s2 = s1.clone(); // the heap data is copied and neither of the variable is
                      // invalidated
